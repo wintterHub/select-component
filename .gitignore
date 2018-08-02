@@ -3,10 +3,3 @@ node_modules/
 dist/
 npm-debug.log
 .idea
-.babelrc
-Makefile
-package-lock.json
-postcss.config.js
-webpack.config.js
-yarn.lock
-src/
