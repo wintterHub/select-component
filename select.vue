@@ -1,30 +1,31 @@
 <template>
   <div>
-    <el-select v-model="vModel" multiple filterable remote reserve-keyword placeholder="placeholder" :remote-method="remoteMethod"
-      :loading="loading">
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+    <el-select v-model="model" filterable remote reserve-keyword :placeholder="placeholder" :remote-method="remoteMethod" :loading="loading"
+      @change="onChange">
+      <el-option v-for="item in options" :key="item" :label="item" :value="item">
       </el-option>
     </el-select>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: {
       placeholder: {
         type: String,
-        default: '请输入关键词',
-        required: true,
+        default: ''
       },
-      vModel: {
+      model: {
         type: String,
         required: true,
       },
       action: {//选项值异步请求地址
         type: String,
-        required: true,
+        default: '',
       }
     },
+
     data() {
       return {
         options: [],
@@ -32,20 +33,23 @@
         loading: false
       }
     },
-    mounted() {
 
-    },
     methods: {
-      async remoteMethod(query) {
+      remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
-          setTimeout(() => {
+          setTimeout(async () => {
             this.loading = false;
-            this.options = await axios(`${this.action}`, { value: vModel }).data.data;
-          }, 200);
+            let res = await axios.get(`${this.action}/${query}`);
+            this.options = res.data;
+          }, 300);
         } else {
           this.options = [];
         }
+      },
+
+      onChange() {
+        this.$emit('change', this.model)
       }
     }
   }
