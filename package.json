@@ -2,7 +2,7 @@
   "name": "h-select",
   "description": "haiguanneibu",
   "author": "1505322835@qq.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --env.dev",
