@@ -1,32 +1,29 @@
 # h-select
 
-> hiaguan neibu ceshi
+远程搜索下拉框
 
-*If you are familiar with [cooking](https://github.com/elemefe/cooking), [here](https://github.com/ElementUI/element-cooking-starter) is a starter generated with it*
+## 安装
 
-## Environment
+> npm install h-select --dev-save
 
-`Node >= 6`
-
-## Start
-
- - Clone or download this repository
- - Enter your local directory, and install dependencies:
-
-``` bash
-yarn
+## 引入
+```js
+improt HSelect from 'h-select'
+Vue.use(HSelect)
 ```
-
-## Develop
-
-``` bash
-# serve with hot reload at localhost:8010
-npm run dev
+## 使用方式
+```HTML
+<h-select 
+  :model="value" 
+  action="/api/options1" 
+  @change="onChange">
+</h-select>
 ```
+## 属性
 
-## Build
+- model 输入框中的值
+- action 下拉选项列表的异步请求地址
+- placeholder 占位符
 
-``` bash
-# build for production with minification
-npm run build
-```
+## 事件
+- change 选中值发生变化时触发，回调参数为目前的选中值
